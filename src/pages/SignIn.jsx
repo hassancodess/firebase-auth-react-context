@@ -23,8 +23,13 @@ function SignIn() {
         .min(8, 'Password is too short - should be 8 chars minimum.')
         .matches(/[a-zA-Z]/, 'Password can only contain Latin letters.'),
     }),
-    onSubmit: () => {
-      console.log(formik.values)
+    onSubmit: async () => {
+      try {
+        await logIn(formik.values.email, formik.values.password)
+        navigate('/')
+      } catch (error) {
+        console.log(error.message)
+      }
     },
   })
   return (

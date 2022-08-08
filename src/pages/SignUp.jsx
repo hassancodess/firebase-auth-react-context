@@ -30,13 +30,16 @@ function SignUp() {
         .required('Required'),
     }),
     onSubmit: async () => {
-      console.log(formik.values)
-      const userCredential = await signUp(
-        formik.values.name,
-        formik.values.email,
-        formik.values.password
-      )
-      console.log(userCredential.user)
+      try {
+        await signUp(
+          formik.values.name,
+          formik.values.email,
+          formik.values.password
+        )
+        navigate('/')
+      } catch (error) {
+        console.log(error.message)
+      }
     },
   })
 
